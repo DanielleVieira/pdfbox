@@ -120,7 +120,7 @@ public final class SecurityHandlerFactory
      * @return a new SecurityHandler instance, or null if none is available.
      */
     private SecurityHandler<ProtectionPolicy> newSecurityHandler(Class<? extends SecurityHandler> handlerClass, 
-            Class<?>[] argsClasses, Object[] args)
+            Class<?>[] argsClasses, Object... args)
     {
         try
         {

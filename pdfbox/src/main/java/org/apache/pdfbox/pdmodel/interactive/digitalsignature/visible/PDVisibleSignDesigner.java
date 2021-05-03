@@ -517,7 +517,7 @@ public class PDVisibleSignDesigner
      * @param formatterRectangleParameters
      * @return Visible Signature Configuration Object
      */
-    public PDVisibleSignDesigner formatterRectangleParameters(int[] formatterRectangleParameters)
+    public PDVisibleSignDesigner formatterRectangleParameters(int... formatterRectangleParameters)
     {
         this.formatterRectangleParameters = formatterRectangleParameters;
         return this;
