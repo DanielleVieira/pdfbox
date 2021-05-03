@@ -66,7 +66,7 @@ class PDTransitionTest
     {
         PDTransition transition = new PDTransition();
         transition.setDimension(PDTransitionDimension.H);
-        assertEquals(PDTransitionDimension.H.name(), transition.getDimension());
+        assertEquals("H", PDTransitionDimension.H.name(), transition.getDimension());
     }
 
     @Test
@@ -74,7 +74,7 @@ class PDTransitionTest
     {
         PDTransition transition = new PDTransition();
         transition.setDirection(PDTransitionDirection.NONE);
-        assertEquals(COSName.class.getName(), transition.getDirection().getClass().getName());
+        assertEquals("org.apache.pdfbox.cos.COSName", COSName.class.getName(), transition.getDirection().getClass().getName());
         assertEquals(COSName.NONE, transition.getDirection());
     }
 
