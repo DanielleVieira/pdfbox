@@ -88,7 +88,8 @@ class CubicBezierCurve
      */
     Point2D[] getCubicBezierCurve()
     {
-        return curve;
+    	Point2D[] copy = curve.clone();
+        return copy;
     }
 
     @Override
