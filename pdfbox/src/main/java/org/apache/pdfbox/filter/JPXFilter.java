@@ -88,9 +88,9 @@ public final class JPXFilter extends Filter
                     for (int x = 0; x < image.getWidth(); ++x)
                     {
                         raster.getPixel(x, y, ar);
-                        for (int i = 0; i < ar.length; ++i)
+                        for(Integer item : ar)
                         {
-                            decoded.write(ar[i]);
+                            decoded.write(item);
                         }
                     }
                 }
