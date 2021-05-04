@@ -415,7 +415,7 @@ class TestTextStripper
         // two methods to get the page index, the result should be identical!
         int indexOfPage = doc.getPages().indexOf(oi.findDestinationPage(doc));
         int pageNum = pageDest.retrievePageNumber();
-        assertEquals(indexOfPage, pageNum);
+        assertEquals(indexOfPage, pageNum, "page index is the same as the page number");
                 
         return pageNum;
     }
@@ -445,13 +445,13 @@ class TestTextStripper
         PDOutlineItem oi3 = it.next();
         PDOutlineItem oi4 = it.next();
 
-        assertEquals(0, findOutlineItemDestPageNum(doc, oi0));
-        assertEquals(2, findOutlineItemDestPageNum(doc, oi2));
-        assertEquals(3, findOutlineItemDestPageNum(doc, oi3));
-        assertEquals(4, findOutlineItemDestPageNum(doc, oi4));
+        assertEquals(0, findOutlineItemDestPageNum(doc, oi0), "oi0 page number equals 0");
+        assertEquals(2, findOutlineItemDestPageNum(doc, oi2), "oi2 page number equals 2");
+        assertEquals(3, findOutlineItemDestPageNum(doc, oi3), "oi3 page number equals 3");
+        assertEquals(4, findOutlineItemDestPageNum(doc, oi4), "oi4 page number equals 4");
 
         String textFull = stripper.getText(doc);
-        assertFalse(textFull.isEmpty());
+        assertFalse(textFull.isEmpty(), "textoFull isn't empty");
         
         String expectedTextFull = 
                 "First level 1\n"
@@ -469,15 +469,15 @@ class TestTextStripper
                 + "Fourth level 1\n"
                 + "Content\n"
                 + "Content\n";
-        assertEquals(expectedTextFull, textFull.replaceAll("\r", ""));
+        assertEquals(expectedTextFull, textFull.replaceAll("\r", ""), "expectedTextFull is equal to textFull");
         
         // this should grab 0-based pages 2 and 3, i.e. 1-based pages 3 and 4
         // by their bookmarks
         stripper.setStartBookmark(oi2);
         stripper.setEndBookmark(oi3);
         String textoi23 = stripper.getText(doc);
-        assertFalse(textoi23.isEmpty());
-        assertNotEquals(textoi23, textFull);
+        assertFalse(textoi23.isEmpty(), "textoi23 isn't empty");
+        assertNotEquals(textoi23, textFull, "textoi123 isn't equal to textFull");
         
         String expectedTextoi23 = 
                 "Second at level 1\n"
@@ -487,7 +487,7 @@ class TestTextStripper
                 + "Third level 2\n"
                 + "Third level 3\n"
                 + "Content\n";
-        assertEquals(expectedTextoi23, textoi23.replaceAll("\r", ""));
+        assertEquals(expectedTextoi23, textoi23.replaceAll("\r", ""), "expectedTextoi23 is equal to textoi23");
         
         // this should grab 0-based pages 2 and 3, i.e. 1-based pages 3 and 4
         // by their page numbers
@@ -496,24 +496,24 @@ class TestTextStripper
         stripper.setStartPage(3);
         stripper.setEndPage(4);
         String textp34 = stripper.getText(doc);
-        assertFalse(textp34.isEmpty());
-        assertNotEquals(textoi23, textFull);
-        assertEquals(textoi23, textp34);        
+        assertFalse(textp34.isEmpty(), "textp34 isn't empty");
+        assertNotEquals(textoi23, textFull, "textp34 isn't equal to textFull");
+        assertEquals(textoi23, textp34, "textoi23 is equal to textp34");        
 
         // this should grab 0-based page 2, i.e. 1-based page 3
         // by the bookmark
         stripper.setStartBookmark(oi2);
         stripper.setEndBookmark(oi2);
         String textoi2 = stripper.getText(doc);
-        assertFalse(textoi2.isEmpty());
-        assertNotEquals(textoi2, textoi23);
-        assertNotEquals(textoi23, textFull);
+        assertFalse(textoi2.isEmpty(), "texti2 isn't empty");
+        assertNotEquals(textoi2, textoi23, "textoi2 isn't equal to textoi23");
+        assertNotEquals(textoi23, textFull, "textoi23 isn't equal to textFull");
         
         String expectedTextoi2 = 
                 "Second at level 1\n"
                 + "Second level 2\n"
                 + "Content\n";        
-        assertEquals(expectedTextoi2, textoi2.replaceAll("\r", ""));
+        assertEquals(expectedTextoi2, textoi2.replaceAll("\r", ""), "expectedTextoi2 is equal to textoi2");
         
          
         // this should grab 0-based page 2, i.e. 1-based page 3
@@ -523,17 +523,17 @@ class TestTextStripper
         stripper.setStartPage(3);
         stripper.setEndPage(3);
         String textp3 = stripper.getText(doc);
-        assertFalse(textp3.isEmpty());
-        assertNotEquals(textp3, textp34);
-        assertNotEquals(textoi23, textFull);
-        assertEquals(textoi2, textp3);
+        assertFalse(textp3.isEmpty(), "textp3 isn't empty");
+        assertNotEquals(textp3, textp34, "textp3 isn't equal to textp34");
+        assertNotEquals(textoi23, textFull, "textoi23 isn't equal to textFull");
+        assertEquals(textoi2, textp3, "textoi2 is equal to textp3");
 
         // Test with orphan bookmark
         PDOutlineItem oiOrphan = new PDOutlineItem();
         stripper.setStartBookmark(oiOrphan);
         stripper.setEndBookmark(oiOrphan);
         String textOiOrphan = stripper.getText(doc);
-        assertTrue(textOiOrphan.isEmpty());
+        assertTrue(textOiOrphan.isEmpty(), "textOiOrphan is empty");
     }
 
     /**
@@ -613,7 +613,7 @@ class TestTextStripper
 
         compareResult(expectedOutFile, outFile, pdfFile, false, diffFile);
         
-        assertFalse(bFail);
+        assertFalse(bFail, "this.bFail is equal to False");
     }
 
     private class PDFTabulaTextStripper extends PDFTextStripper

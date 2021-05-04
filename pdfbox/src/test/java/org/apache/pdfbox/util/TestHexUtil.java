@@ -36,10 +36,10 @@ class TestHexUtil
     @Test
     void testGetCharsFromShortWithoutPassingInABuffer()
     {
-        assertArrayEquals(new char[]{'0','0','0','0'}, Hex.getChars((short)0x0000));
-        assertArrayEquals(new char[]{'0','0','0','F'}, Hex.getChars((short)0x000F));
-        assertArrayEquals(new char[]{'A','B','C','D'}, Hex.getChars((short)0xABCD));
-        assertArrayEquals(new char[]{'B','A','B','E'}, Hex.getChars((short)0xCAFEBABE));
+        assertArrayEquals(new char[]{'0','0','0','0'}, Hex.getChars((short)0x0000), "new char does equals HEX char");
+        assertArrayEquals(new char[]{'0','0','0','F'}, Hex.getChars((short)0x000F), "new char does equals HEX char");
+        assertArrayEquals(new char[]{'A','B','C','D'}, Hex.getChars((short)0xABCD), "new char does equals HEX char");
+        assertArrayEquals(new char[]{'B','A','B','E'}, Hex.getChars((short)0xCAFEBABE), "new char does equals HEX char");
     }
 
     /**
@@ -50,8 +50,8 @@ class TestHexUtil
     @Test
     void testGetCharsUTF16BE()
     {
-        assertArrayEquals(new char[]{'0','0','6','1','0','0','6','2'}, Hex.getCharsUTF16BE("ab"));
-        assertArrayEquals(new char[]{'5','E','2','E','5','2','A','9'}, Hex.getCharsUTF16BE("帮助"));
+        assertArrayEquals(new char[]{'0','0','6','1','0','0','6','2'}, Hex.getCharsUTF16BE("ab"), "new char does equals HEX char UTF-16");
+        assertArrayEquals(new char[]{'5','E','2','E','5','2','A','9'}, Hex.getCharsUTF16BE("帮助"), "new char does equals HEX char UTF-16");
     }
 
     /**
@@ -66,23 +66,23 @@ class TestHexUtil
             byteSrcArray[i] = (byte) i;
 
             byte[] bytes = Hex.getBytes((byte) i);
-            assertEquals(2, bytes.length);
+            assertEquals(2, bytes.length, "lengh of HEX bytes does equals 2");
             String s2 = String.format(Locale.US, "%02X", i);
-            assertArrayEquals(s2.getBytes(StandardCharsets.US_ASCII), bytes);
+            assertArrayEquals(s2.getBytes(StandardCharsets.US_ASCII), bytes, "s2 bytes (Local format) does equals HEX bytes");
             s2 = Hex.getString((byte) i);
-            assertArrayEquals(s2.getBytes(StandardCharsets.US_ASCII), bytes);
+            assertArrayEquals(s2.getBytes(StandardCharsets.US_ASCII), bytes, "s2 bytes does equals HEX bytes");
             
-            assertArrayEquals(new byte[]{(byte) i}, Hex.decodeHex(s2));
+            assertArrayEquals(new byte[]{(byte) i}, Hex.decodeHex(s2), "new bytedoes equals decode Hex s2 byte");
         }
         byte[] byteDstArray = Hex.getBytes(byteSrcArray);
-        assertEquals(byteDstArray.length, byteSrcArray.length * 2);
+        assertEquals(byteDstArray.length, byteSrcArray.length * 2, "byteDstArray does is twice as large as byteSrcArray");
 
         String dstString = Hex.getString(byteSrcArray);
-        assertEquals(dstString.length(), byteSrcArray.length * 2);
+        assertEquals(dstString.length(), byteSrcArray.length * 2, "dstString does is twice as large as byteSrcArray");
 
-        assertArrayEquals(dstString.getBytes(StandardCharsets.US_ASCII), byteDstArray);
+        assertArrayEquals(dstString.getBytes(StandardCharsets.US_ASCII), byteDstArray, "dstString bytes does equals byteDstArray");
         
-        assertArrayEquals(byteSrcArray, Hex.decodeHex(dstString));
+        assertArrayEquals(byteSrcArray, Hex.decodeHex(dstString), "byteSrcArray does equals decode HEX dstString");
     }
 
 }
