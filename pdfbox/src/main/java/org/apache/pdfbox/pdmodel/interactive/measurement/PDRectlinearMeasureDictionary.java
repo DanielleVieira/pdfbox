@@ -97,7 +97,7 @@ public class PDRectlinearMeasureDictionary extends PDMeasureDictionary
      * 
      * @param changeXs changes along the x-axis
      */
-    public void setChangeXs(PDNumberFormatDictionary... changeXs)
+    public void setChangeXs(PDNumberFormatDictionary[] changeXs)
     {
         COSArray array = new COSArray();
         for (PDNumberFormatDictionary changeX : changeXs)
