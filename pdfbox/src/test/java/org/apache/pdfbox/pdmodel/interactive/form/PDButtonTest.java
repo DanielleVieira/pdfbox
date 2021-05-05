@@ -70,10 +70,10 @@ class PDButtonTest
     {
         PDButton buttonField = new PDCheckBox(acroForm);
         
-        assertEquals(buttonField.getFieldType(), buttonField.getCOSObject().getNameAsString(COSName.FT));
-        assertEquals("Btn", buttonField.getFieldType());
-        assertFalse(buttonField.isPushButton());
-        assertFalse(buttonField.isRadioButton());
+        assertEquals(buttonField.getFieldType(), buttonField.getCOSObject().getNameAsString(COSName.FT), "buttonFieldType does equal to COSObject");
+        assertEquals("Btn", buttonField.getFieldType(), "buttonFieldType does equal to Btn");
+        assertFalse(buttonField.isPushButton(), "buttonField isn't a push Button");
+        assertFalse(buttonField.isRadioButton(), "buttonField isn't a radio Button");
     }
 
     @Test
@@ -81,10 +81,10 @@ class PDButtonTest
     {
         PDButton buttonField = new PDPushButton(acroForm);
         
-        assertEquals(buttonField.getFieldType(), buttonField.getCOSObject().getNameAsString(COSName.FT));
-        assertEquals("Btn", buttonField.getFieldType());
-        assertTrue(buttonField.isPushButton());
-        assertFalse(buttonField.isRadioButton());
+        assertEquals(buttonField.getFieldType(), buttonField.getCOSObject().getNameAsString(COSName.FT), "buttonField type is equal to buttonField COSObject");
+        assertEquals("Btn", buttonField.getFieldType(), "buttonFieldType does equal to Btn");
+        assertTrue(buttonField.isPushButton(),"buttonField is a push Button");
+        assertFalse(buttonField.isRadioButton(), "buttonField isn't a radio Button");
     }
 
     @Test
@@ -92,10 +92,10 @@ class PDButtonTest
     {
         PDButton buttonField = new PDRadioButton(acroForm);
         
-        assertEquals(buttonField.getFieldType(), buttonField.getCOSObject().getNameAsString(COSName.FT));
-        assertEquals("Btn", buttonField.getFieldType());
-        assertTrue(buttonField.isRadioButton());
-        assertFalse(buttonField.isPushButton());
+        assertEquals(buttonField.getFieldType(), buttonField.getCOSObject().getNameAsString(COSName.FT), "buttonField type is equal to buttonField COSObject");
+        assertEquals("Btn", buttonField.getFieldType(), "buttonFieldType does equal to Btn");
+        assertFalse(buttonField.isPushButton(), "buttonField isn't a push Button");
+        assertTrue(buttonField.isRadioButton(), "buttonField is a radio Button");
     }
     
     /**
@@ -166,38 +166,38 @@ class PDButtonTest
     void retrieveAcrobatCheckBoxProperties()
     {
         PDCheckBox checkbox = (PDCheckBox) acrobatAcroForm.getField("Checkbox");
-        assertNotNull(checkbox);
-        assertEquals("Yes", checkbox.getOnValue());
-        assertEquals(1, checkbox.getOnValues().size());
-        assertTrue(checkbox.getOnValues().contains("Yes"));
+        assertNotNull(checkbox, "checkbox isn't null");
+        assertEquals("Yes", checkbox.getOnValue(), "checkbox value does equal to Yes");
+        assertEquals(1, checkbox.getOnValues().size(), "checkbox size does equal to 1");
+        assertTrue(checkbox.getOnValues().contains("Yes"), "checkbox values contains Yes");
     }
     
     @Test
     void testAcrobatCheckBoxProperties() throws IOException
     {
         PDCheckBox checkbox = (PDCheckBox) acrobatAcroForm.getField("Checkbox");
-        assertEquals("Off", checkbox.getValue());
-        assertEquals(false, checkbox.isChecked());
+        assertEquals("Off", checkbox.getValue(), "checkbox value does equal to Off");
+        assertEquals(false, checkbox.isChecked(), "checkbox verification is false");
 
         checkbox.check();
-        assertEquals(checkbox.getValue(), checkbox.getOnValue());
-        assertEquals(true, checkbox.isChecked());
+        assertEquals(checkbox.getValue(), checkbox.getOnValue(), "getValue and getOnValue return the same result");
+        assertEquals(true, checkbox.isChecked(), "checkbox verification is true");
 
         checkbox.setValue("Yes");
-        assertEquals(checkbox.getValue(), checkbox.getOnValue());
-        assertEquals(true, checkbox.isChecked());
-        assertEquals(COSName.YES, checkbox.getCOSObject().getDictionaryObject(COSName.AS));
+        assertEquals(checkbox.getValue(), checkbox.getOnValue(), "getValue and getOnValue return the same result");
+        assertEquals(true, checkbox.isChecked(), "checkbox verification is true");
+        assertEquals(COSName.YES, checkbox.getCOSObject().getDictionaryObject(COSName.AS), "YES COSName does equal to checkbox COSObjectAS");
 
         checkbox.setValue("Off");
-        assertEquals(COSName.Off.getName(), checkbox.getValue());
-        assertEquals(false, checkbox.isChecked());
-        assertEquals(COSName.Off, checkbox.getCOSObject().getDictionaryObject(COSName.AS));
+        assertEquals(COSName.Off.getName(), checkbox.getValue(), "Off COSName does equal to checkbox value");
+        assertEquals(false, checkbox.isChecked(), "checkbox verification is false");
+        assertEquals(COSName.Off, checkbox.getCOSObject().getDictionaryObject(COSName.AS), "Off COSName does equal to checkbox COSObjectAS");
 
         checkbox = (PDCheckBox) acrobatAcroForm.getField("Checkbox-DefaultValue");
-        assertEquals(checkbox.getDefaultValue(), checkbox.getOnValue());
+        assertEquals(checkbox.getDefaultValue(), checkbox.getOnValue(), "checkbox default value does equal checkbox getOnValue");
         
         checkbox.setDefaultValue("Off");
-        assertEquals(COSName.Off.getName(), checkbox.getDefaultValue());
+        assertEquals(COSName.Off.getName(), checkbox.getDefaultValue(), "Off COSName does equal checkbox default value");
     }
     
     @Test
