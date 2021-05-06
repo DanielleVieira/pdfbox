@@ -206,56 +206,56 @@ class PDButtonTest
         PDField checkbox = acrobatAcroForm.getField("Checkbox");
 
         checkbox.setValue("Yes");
-        assertEquals(checkbox.getValueAsString(), ((PDCheckBox) checkbox).getOnValue());
-        assertEquals(true, ((PDCheckBox) checkbox).isChecked());
-        assertEquals(COSName.YES, checkbox.getCOSObject().getDictionaryObject(COSName.AS));
+        assertEquals(checkbox.getValueAsString(), ((PDCheckBox) checkbox).getOnValue(), "Yes COSName does equal to checkbox value");
+        assertEquals(true, ((PDCheckBox) checkbox).isChecked(), "checkbox verification is true");
+        assertEquals(COSName.YES, checkbox.getCOSObject().getDictionaryObject(COSName.AS), "Yes COSName does equal to checkbox COSObjectAS");
 
         checkbox.setValue("Off");
-        assertEquals(COSName.Off.getName(), checkbox.getValueAsString());
-        assertEquals(false, ((PDCheckBox) checkbox).isChecked());
-        assertEquals(COSName.Off, checkbox.getCOSObject().getDictionaryObject(COSName.AS));
+        assertEquals(COSName.Off.getName(), checkbox.getValueAsString(), "Off COSName does equal to checkbox value");
+        assertEquals(false, ((PDCheckBox) checkbox).isChecked(), "checkbox verification is true");
+        assertEquals(COSName.Off, checkbox.getCOSObject().getDictionaryObject(COSName.AS), "Off COSName does equal to checkbox COSObjectAS");
     }
     
     @Test
     void testAcrobatCheckBoxGroupProperties() throws IOException
     {
         PDCheckBox checkbox = (PDCheckBox) acrobatAcroForm.getField("CheckboxGroup");
-        assertEquals("Off", checkbox.getValue());
-        assertEquals(false, checkbox.isChecked());
+        assertEquals("Off", checkbox.getValue(), "checkbox value does equal to Off");
+        assertEquals(false, checkbox.isChecked(), "checking checkbox is false");
 
         checkbox.check();
-        assertEquals(checkbox.getValue(), checkbox.getOnValue());
-        assertEquals(true, checkbox.isChecked());
+        assertEquals(checkbox.getValue(), checkbox.getOnValue(), "getValue and getOnValue return the same result");
+        assertEquals(true, checkbox.isChecked(), "checking checkbox is true");
 
-        assertEquals(3, checkbox.getOnValues().size());
-        assertTrue(checkbox.getOnValues().contains("Option1"));
-        assertTrue(checkbox.getOnValues().contains("Option2"));
-        assertTrue(checkbox.getOnValues().contains("Option3"));
+        assertEquals(3, checkbox.getOnValues().size(), "checkbox size does equal to 3");
+        assertTrue(checkbox.getOnValues().contains("Option1"), "checkbox contains Option1 value");
+        assertTrue(checkbox.getOnValues().contains("Option2"), "checkbox contains Option2 value");
+        assertTrue(checkbox.getOnValues().contains("Option3"), "checkbox contains Option3 value");
 
         // test a value which sets one of the individual checkboxes within the group
         checkbox.setValue("Option1");
-        assertEquals("Option1", checkbox.getValue());
-        assertEquals("Option1", checkbox.getValueAsString());
+        assertEquals("Option1", checkbox.getValue(), "checkbox value does equal to Option1");
+        assertEquals("Option1", checkbox.getValueAsString(), "the method getValueAsString return 'Option1'");
 
         // ensure that for the widgets representing the individual checkboxes
         // the AS entry has been set
-        assertEquals("Option1", checkbox.getWidgets().get(0).getAppearanceState().getName());
-        assertEquals("Off", checkbox.getWidgets().get(1).getAppearanceState().getName());
-        assertEquals("Off", checkbox.getWidgets().get(2).getAppearanceState().getName());
-        assertEquals("Off", checkbox.getWidgets().get(3).getAppearanceState().getName());
+        assertEquals("Option1", checkbox.getWidgets().get(0).getAppearanceState().getName(), "checkbox widget of position 0 does equal to Option1");
+        assertEquals("Off", checkbox.getWidgets().get(1).getAppearanceState().getName(), "checkbox widget of position 1 does equal to Off");
+        assertEquals("Off", checkbox.getWidgets().get(2).getAppearanceState().getName(), "checkbox widget of position 2 does equal to Off");
+        assertEquals("Off", checkbox.getWidgets().get(3).getAppearanceState().getName(), "checkbox widget of position 3 does equal to Off");
 
         // test a value which sets two of the individual chekboxes within the group
         // as the have the same name entry for being checked
         checkbox.setValue("Option3");
-        assertEquals("Option3", checkbox.getValue());
-        assertEquals("Option3", checkbox.getValueAsString());
+        assertEquals("Option3", checkbox.getValue(), "checkbox value does equal to Option3");
+        assertEquals("Option3", checkbox.getValueAsString(), "the method getValueAsString return 'Option3'");
 
         // ensure that for both widgets representing the individual checkboxes
         // the AS entry has been set
-        assertEquals("Off", checkbox.getWidgets().get(0).getAppearanceState().getName());
-        assertEquals("Off", checkbox.getWidgets().get(1).getAppearanceState().getName());
-        assertEquals("Option3", checkbox.getWidgets().get(2).getAppearanceState().getName());
-        assertEquals("Option3", checkbox.getWidgets().get(3).getAppearanceState().getName());
+        assertEquals("Off", checkbox.getWidgets().get(0).getAppearanceState().getName(), "checkbox widget of position 0 does equal to Off");
+        assertEquals("Off", checkbox.getWidgets().get(1).getAppearanceState().getName(), "checkbox widget of position 1 does equal to Off");
+        assertEquals("Option3", checkbox.getWidgets().get(2).getAppearanceState().getName(), "checkbox widget of position 2 does equal to Option3");
+        assertEquals("Option3", checkbox.getWidgets().get(3).getAppearanceState().getName(), "checkbox widget of position 3 does equal to Option3");
     }
     
     @Test
@@ -265,26 +265,26 @@ class PDButtonTest
 
         // test a value which sets one of the individual checkboxes within the group
         checkbox.setValue("Option1");
-        assertEquals("Option1",checkbox.getValueAsString());
+        assertEquals("Option1",checkbox.getValueAsString(), "checkbox value does equal to Option1");
 
         // ensure that for the widgets representing the individual checkboxes
         // the AS entry has been set
-        assertEquals("Option1",checkbox.getWidgets().get(0).getAppearanceState().getName());
-        assertEquals("Off",checkbox.getWidgets().get(1).getAppearanceState().getName());
-        assertEquals("Off",checkbox.getWidgets().get(2).getAppearanceState().getName());
-        assertEquals("Off",checkbox.getWidgets().get(3).getAppearanceState().getName());
+        assertEquals("Option1",checkbox.getWidgets().get(0).getAppearanceState().getName(), "checkbox widget of position 0 does equal to Option1");
+        assertEquals("Off",checkbox.getWidgets().get(1).getAppearanceState().getName(), "checkbox widget of position 1 does equal to Off");
+        assertEquals("Off",checkbox.getWidgets().get(2).getAppearanceState().getName(), "checkbox widget of position 2 does equal to Off");
+        assertEquals("Off",checkbox.getWidgets().get(3).getAppearanceState().getName(), "checkbox widget of position 3 does equal to Off");
         
         // test a value which sets two of the individual chekboxes within the group
         // as the have the same name entry for being checked
         checkbox.setValue("Option3");
-        assertEquals("Option3",checkbox.getValueAsString());
+        assertEquals("Option3",checkbox.getValueAsString(), "checkbox value does equal to Option3");
         
         // ensure that for both widgets representing the individual checkboxes
         // the AS entry has been set
-        assertEquals("Off",checkbox.getWidgets().get(0).getAppearanceState().getName());
-        assertEquals("Off",checkbox.getWidgets().get(1).getAppearanceState().getName());
-        assertEquals("Option3",checkbox.getWidgets().get(2).getAppearanceState().getName());
-        assertEquals("Option3",checkbox.getWidgets().get(3).getAppearanceState().getName());
+        assertEquals("Off",checkbox.getWidgets().get(0).getAppearanceState().getName(), "checkbox widget of position 0 does equal to Off");
+        assertEquals("Off",checkbox.getWidgets().get(1).getAppearanceState().getName(), "checkbox widget of position 1 does equal to Off");
+        assertEquals("Option3",checkbox.getWidgets().get(2).getAppearanceState().getName(), "checkbox widget of position 2 does equal to Option3");
+        assertEquals("Option3",checkbox.getWidgets().get(3).getAppearanceState().getName(), "checkbox widget of position 3 does equal to Option3");
     }
     
     @Test
@@ -323,10 +323,10 @@ class PDButtonTest
     void retrieveAcrobatRadioButtonProperties()
     {
         PDRadioButton radioButton = (PDRadioButton) acrobatAcroForm.getField("RadioButtonGroup");
-        assertNotNull(radioButton);
-        assertEquals(2, radioButton.getOnValues().size());
-        assertTrue(radioButton.getOnValues().contains("RadioButton01"));
-        assertTrue(radioButton.getOnValues().contains("RadioButton02"));
+        assertNotNull(radioButton, "radioButton isn't null");
+        assertEquals(2, radioButton.getOnValues().size(), "the size of the radioButton is equal to 2");
+        assertTrue(radioButton.getOnValues().contains("RadioButton01"), "radioButton values contains RadioButton01");
+        assertTrue(radioButton.getOnValues().contains("RadioButton02"), "radioButton values contains RadioButton02");
     }
     
     @Test
@@ -336,21 +336,25 @@ class PDButtonTest
 
         // Set value so that first radio button option is selected
         radioButton.setValue("RadioButton01");
-        assertEquals("RadioButton01", radioButton.getValue());
+        assertEquals("RadioButton01", radioButton.getValue(), "radioButton value does equal to RadioButton01");
         // First option shall have /RadioButton01, second shall have /Off
         assertEquals(COSName.getPDFName("RadioButton01"),
-                radioButton.getWidgets().get(0).getCOSObject().getDictionaryObject(COSName.AS));
+                radioButton.getWidgets().get(0).getCOSObject().getDictionaryObject(COSName.AS),
+                "COSName of PDF RadioButton01 does equal to radioButton widgets of the postion 0");
         assertEquals(COSName.Off,
-                radioButton.getWidgets().get(1).getCOSObject().getDictionaryObject(COSName.AS));
+                radioButton.getWidgets().get(1).getCOSObject().getDictionaryObject(COSName.AS),
+                "Off COSName RadioButton01 does equal to radioButton widgets of the postion 1");
 
         // Set value so that second radio button option is selected
         radioButton.setValue("RadioButton02");
-        assertEquals("RadioButton02", radioButton.getValue());
+        assertEquals("RadioButton02", radioButton.getValue(), "radioButton value does equal to RadioButton03");
         // First option shall have /Off, second shall have /RadioButton02
         assertEquals(COSName.Off,
-                radioButton.getWidgets().get(0).getCOSObject().getDictionaryObject(COSName.AS));
+                radioButton.getWidgets().get(0).getCOSObject().getDictionaryObject(COSName.AS),
+                "Off COSName RadioButton02 does equal to radioButton widgets of the postion 0");
         assertEquals(COSName.getPDFName("RadioButton02"),
-                radioButton.getWidgets().get(1).getCOSObject().getDictionaryObject(COSName.AS));
+                radioButton.getWidgets().get(1).getCOSObject().getDictionaryObject(COSName.AS),
+                "COSName of PDF RadioButton02 does equal to radioButton widgets of the postion 1");
     }
     
     @Test
@@ -363,18 +367,22 @@ class PDButtonTest
         assertEquals("RadioButton01", radioButton.getValueAsString());
         // First option shall have /RadioButton01, second shall have /Off
         assertEquals(COSName.getPDFName("RadioButton01"),
-                radioButton.getWidgets().get(0).getCOSObject().getDictionaryObject(COSName.AS));
+                radioButton.getWidgets().get(0).getCOSObject().getDictionaryObject(COSName.AS),
+                "COSName of PDF RadioButton01 does equal to radioButton widgets of the postion 0");
         assertEquals(COSName.Off,
-                radioButton.getWidgets().get(1).getCOSObject().getDictionaryObject(COSName.AS));
+                radioButton.getWidgets().get(1).getCOSObject().getDictionaryObject(COSName.AS),
+                "Off COSName RadioButton01 does equal to radioButton widgets of the postion 1");
 
         // Set value so that second radio button option is selected
         radioButton.setValue("RadioButton02");
         assertEquals("RadioButton02", radioButton.getValueAsString());
         // First option shall have /Off, second shall have /RadioButton02
         assertEquals(COSName.Off,
-                radioButton.getWidgets().get(0).getCOSObject().getDictionaryObject(COSName.AS));
+                radioButton.getWidgets().get(0).getCOSObject().getDictionaryObject(COSName.AS),
+                "Off COSName RadioButton02 does equal to radioButton widgets of the postion 0");
         assertEquals(COSName.getPDFName("RadioButton02"),
-                radioButton.getWidgets().get(1).getCOSObject().getDictionaryObject(COSName.AS));
+                radioButton.getWidgets().get(1).getCOSObject().getDictionaryObject(COSName.AS),
+                "COSName of PDF RadioButton02 does equal to radioButton widgets of the postion 1");
     }
     
     @Test
