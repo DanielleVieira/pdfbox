@@ -77,16 +77,17 @@ public final class PDXFAResource implements COSObjectable
      */    
     public byte[] getBytes() throws IOException 
     {
+    	byte[] result = new byte[0];
         // handle the case if the XFA is split into individual parts
         if (this.getCOSObject() instanceof COSArray) 
         {
-            return getBytesFromPacket((COSArray) this.getCOSObject());
+        	result = getBytesFromPacket((COSArray) this.getCOSObject());
         }
         else if (xfa.getCOSObject() instanceof COSStream) 
         {
-            return getBytesFromStream((COSStream) this.getCOSObject());
+        	result = getBytesFromStream((COSStream) this.getCOSObject());
         }
-        return new byte[0];
+        return result;
     }
     
     /*

@@ -448,16 +448,17 @@ public abstract class PDChoice extends PDVariableText
      */
     private List<String> getValueFor(COSName name)
     {
+    	List<String> result = Collections.emptyList();
         COSBase value = getCOSObject().getDictionaryObject(name);
         if (value instanceof COSString)
         {
-            return Collections.singletonList(((COSString) value).getString());
+        	result = Collections.singletonList(((COSString) value).getString());
         }
         else if (value instanceof COSArray)
         {
-            return ((COSArray) value).toCOSStringStringList();
+        	result = ((COSArray) value).toCOSStringStringList();
         }
-        return Collections.emptyList();
+        return result;
     }
 
     @Override

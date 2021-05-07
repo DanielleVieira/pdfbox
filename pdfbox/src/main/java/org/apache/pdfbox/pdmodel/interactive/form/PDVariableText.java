@@ -232,14 +232,15 @@ public abstract class PDVariableText extends PDTerminalField
      */
     protected final String getStringOrStream(COSBase base)
     {
+    	String result = ""; 
         if (base instanceof COSString)
         {
-            return ((COSString)base).getString();
+        	result = ((COSString)base).getString();
         }
         else if (base instanceof COSStream)
         {
-            return ((COSStream)base).toTextString();
+        	result = ((COSStream)base).toTextString();
         }
-        return "";
+        return result;
     }
 }

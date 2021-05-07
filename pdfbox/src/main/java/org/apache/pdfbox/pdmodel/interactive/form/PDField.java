@@ -87,18 +87,20 @@ public abstract class PDField implements COSObjectable
      */
     protected COSBase getInheritableAttribute(COSName key)
     {
+    	COSBase result = null;
         if (dictionary.containsKey(key))
         {
-            return dictionary.getDictionaryObject(key);
+        	result = dictionary.getDictionaryObject(key);
         }
         else if (parent != null)
         {
-            return parent.getInheritableAttribute(key);
+        	result = parent.getInheritableAttribute(key);
         }
         else
         {
-            return acroForm.getCOSObject().getDictionaryObject(key);
+        	result = acroForm.getCOSObject().getDictionaryObject(key);
         }
+        return result;
     }
     
     /**

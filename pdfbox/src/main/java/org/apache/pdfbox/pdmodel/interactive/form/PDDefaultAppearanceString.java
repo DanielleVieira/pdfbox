@@ -152,14 +152,16 @@ class PDDefaultAppearanceString
 
         COSBase base0 = operands.get(0);
         COSBase base1 = operands.get(1);
+        boolean exit = false;
         if (!(base0 instanceof COSName))
         {
-            return;
+        	exit = true;
         }
         if (!(base1 instanceof COSNumber))
         {
-            return;
+        	exit = true;
         }
+        if (exit) return;
         COSName fontName = (COSName) base0;
         
         PDFont font = defaultResources.getFont(fontName);

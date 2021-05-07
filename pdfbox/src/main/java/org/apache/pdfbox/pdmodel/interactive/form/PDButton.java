@@ -325,14 +325,15 @@ public abstract class PDButton extends PDTerminalField
         if (!getExportValues().isEmpty())
         {
             onValues.addAll(getExportValues());
-            return onValues;
         }
-        
-        List<PDAnnotationWidget> widgets = this.getWidgets();
-        for (PDAnnotationWidget widget : widgets)
+        else
         {
-            onValues.add(getOnValueForWidget(widget));
-        }        
+        	List<PDAnnotationWidget> widgets = this.getWidgets();
+        	for (PDAnnotationWidget widget : widgets)
+        	{
+        		onValues.add(getOnValueForWidget(widget));
+        	}                	
+        }  
         return onValues;
     }
     
@@ -354,6 +355,7 @@ public abstract class PDButton extends PDTerminalField
      */
     private String getOnValueForWidget(PDAnnotationWidget widget)
     {
+    	String result = "";
         PDAppearanceDictionary apDictionary = widget.getAppearance();
         if (apDictionary != null) 
         {
@@ -365,12 +367,13 @@ public abstract class PDButton extends PDTerminalField
                 {
                     if (COSName.Off.compareTo(entry) != 0)
                     {
-                        return entry.getName();
+                    	result = entry.getName();
+                    	break;
                     }
                 }
             }
         }
-        return "";
+        return result;
     }
     
     /**
